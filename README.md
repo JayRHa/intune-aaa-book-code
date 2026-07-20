@@ -1,14 +1,32 @@
-# AI, Automation and Analytics - the code
+<!-- jr-brand:start -->
+<div align="center">
+  <a href="https://jannikreinhard.com/">
+    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/learning.svg" alt="Jannik Reinhard — AI, Cloud and Endpoint Management" width="100%">
+  </a>
+  <h1>AI, Automation and Analytics · Book Code</h1>
+  <p><strong>Companion code for the book 'AI, Automation and Analytics: Transforming Device Management with Intune' (2nd Edition) by Jannik Reinhard - every listing as a runnable file: Microsoft Graph, KQL, Device Query, keyless automation, Azure AI Search grounding, and a Microsoft Foundry assistant.</strong></p>
+  <p>
+  <a href="https://jannikreinhard.com/"><img src="https://img.shields.io/badge/Website-0A5FC0?style=flat-square&amp;logo=wordpress&amp;logoColor=white" alt="Website"></a>
+  <a href="https://github.com/JayRHa"><img src="https://img.shields.io/badge/GitHub-081427?style=flat-square&amp;logo=github&amp;logoColor=white" alt="GitHub"></a>
+  <a href="https://www.linkedin.com/in/jannik-r/"><img src="https://img.shields.io/badge/LinkedIn-0795FF?style=flat-square&amp;logo=linkedin&amp;logoColor=white" alt="LinkedIn"></a>
+  <a href="https://x.com/jannik_reinhard"><img src="https://img.shields.io/badge/X-081427?style=flat-square&amp;logo=x&amp;logoColor=white" alt="X"></a>
+  <a href="https://www.youtube.com/@ModernDevMgmt/featured"><img src="https://img.shields.io/badge/YouTube-0A5FC0?style=flat-square&amp;logo=youtube&amp;logoColor=white" alt="YouTube"></a>
+</p>
+  <p><sub>Book · Sample · Pattern · PowerShell · Practical by design</sub></p>
+</div>
+<!-- jr-brand:end -->
+
+## About This Repository
 
 Every code listing from the book **AI, Automation and Analytics: Transforming Device Management with Intune** (2nd Edition) by [Jannik Reinhard](https://jannikreinhard.com), as a file you can run, organized by chapter.
 
 This is the second edition, rechecked line by line for the Microsoft cloud as it actually is in 2026 - which is a different place than when the first edition shipped. Azure OpenAI became **Microsoft Foundry**. The way you authenticate to Microsoft Graph changed: the honest current answer is **stop using secrets**. Copilot in Intune went GA and now writes the very KQL this book teaches you to write by hand. So the code here is keyless from the start and current, not a reprint of 2024 patterns.
 
-## The 2026 context, in one paragraph
+## The 2026 Context
 
 Three ideas run through all of it. **Keyless auth**: Azure-hosted automation uses a **managed identity**; code outside Azure uses **workload identity federation**; there is no client secret anywhere. **The current SDKs**: the `Microsoft.Graph` PowerShell SDK for Intune (MSOnline and AzureAD are retired), and `DefaultAzureCredential` from `azure-identity` in Python. **KQL in three places**: the same Kusto you learn for Log Analytics also drives **Device Query** and **Copilot in Intune** - learn it once, use it everywhere.
 
-## Start here
+## Start Here
 
 ```bash
 git clone https://github.com/JayRHa/intune-aaa-book-code
@@ -37,7 +55,7 @@ Nothing here stores a secret. In Azure the identity is a managed identity; on yo
 
 Chapters 1-3, 6-7, and 11 are prose - concepts, history, prompting theory, and where this all goes next - so they have no code folder here.
 
-## About the code
+## About the Code
 
 **These are the book's listings, not a rewrite of them.** A listing printed in a book can lean on the prose around it: the book explains what a managed identity is a page earlier, so the listing just calls `Connect-MgGraph -Identity`. A file cannot. So each file here adds the bootstrap the book resolves in prose - reading endpoints from the environment, naming the exact scopes and roles it needs - and otherwise leaves the code exactly as printed. Where the book shows a fragment on purpose (a Graph request you run in Graph Explorer, the skeleton of an Azure Function), the file says so in its header and shows the surrounding lines it needs.
 
@@ -52,3 +70,15 @@ Every file starts with a header naming its chapter and the book, and the setup i
 ## License
 
 MIT - see [LICENSE](LICENSE).
+
+<!-- jr-brand-footer:start -->
+
+---
+
+<div align="center">
+  <p><sub>Built and maintained by <a href="https://jannikreinhard.com/">Jannik Reinhard</a> · Microsoft MVP for Security and AI Platform.</sub></p>
+  <p><a href="https://www.buymeacoffee.com/jannikreinf">Support the open-source work</a></p>
+  <p><strong>Stay healthy, Cheers Jannik</strong></p>
+</div>
+
+<!-- jr-brand-footer:end -->
