@@ -1,0 +1,10 @@
+# Everything the Python listings in this repo import.
+# Pinned to the majors the book was written against (mid-2026).
+
+azure-identity>=1.19.0          # keyless auth: DefaultAzureCredential
+azure-search-documents>=11.6.0  # ch09 - Azure AI Search data plane + indexer client
+openai>=1.60.0                  # ch10 - Foundry models on the v1 route
+streamlit>=1.40.0               # ch10 - the minimal chat UI (app.py)
+
+# PowerShell listings (ch04, ch05) use the Microsoft.Graph PowerShell SDK:
+#   Install-Module Microsoft.Graph -Scope CurrentUser

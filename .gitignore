@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.DS_Store
+*.log
+
+# Local Intune export output (see ch04-analytics/export-report.ps1)
+intuneExport/
+intuneExport.zip

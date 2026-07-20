@@ -1,0 +1,39 @@
+# Chapter 4 - Intune's Capabilities in Analytics and Automation
+# From the book "AI, Automation and Analytics - Transforming Device Management
+# with Intune" (2nd Edition) by Jannik Reinhard.
+# https://github.com/JayRHa/intune-aaa-book-code
+#
+# When you need several small pieces of data at once - the kind of tenant-summary
+# dashboard the Intune home page builds - do not fire ten sequential requests.
+# Use the Graph $batch endpoint to send them as one round trip. Graph returns an
+# array of responses keyed by your "id" values. Easier on the throttle budget and
+# noticeably faster. Use id-based "dependsOn" when one call must run after
+# another; for read-only summaries you usually want them parallel.
+
+@graph = https://graph.microsoft.com
+
+### One request, three sub-requests
+POST {{graph}}/v1.0/$batch
+Content-Type: application/json
+
+{
+  "requests": [
+    {
+      "id": "complianceSummary",
+      "method": "GET",
+      "url": "/deviceManagement/deviceCompliancePolicyDeviceStateSummary"
+    },
+    {
+      "id": "subscriptionState",
+      "method": "GET",
+      "url": "/deviceManagement/subscriptionState"
+    },
+    {
+      "id": "failedApps",
+      "method": "POST",
+      "url": "/deviceManagement/reports/getFailedMobileAppsSummaryReport",
+      "body": { "filter": "" },
+      "headers": { "Content-Type": "application/json" }
+    }
+  ]
+}

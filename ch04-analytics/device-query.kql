@@ -1,0 +1,24 @@
+// Chapter 4 - Intune's Capabilities in Analytics and Automation
+// From the book "AI, Automation and Analytics - Transforming Device Management
+// with Intune" (2nd Edition) by Jannik Reinhard.
+// https://github.com/JayRHa/intune-aaa-book-code
+//
+// Device Query is different from the Log Analytics KQL in kql-tutorial.kql: this
+// KQL runs against a device's LIVE state, not a log workspace. Open a device in
+// the Intune admin center, choose Device query, and paste one of these.
+//
+// Requires the Advanced Analytics license (folds into Microsoft 365 E3/E5 on
+// 1 July 2026). Single-device limits: 128 KB payload, 15 queries/minute.
+
+// Live CPU details from the selected device.
+Cpu
+| project ProcessorId, CurrentClockSpeed, MaxClockSpeed, CpuStatus
+
+// Read a specific registry key.
+WindowsRegistry('HKEY_LOCAL_MACHINE\\SOFTWARE\\...')
+| project RegistryKey, ValueName, ValueType, ValueData
+
+// System event-log entries from the last 7 days matching an event id.
+WindowsEvent('System', 7d)
+| where tostring(EventId) == '6008'
+| project EventId, LoggedDateTime, LogName, Message, ProviderName

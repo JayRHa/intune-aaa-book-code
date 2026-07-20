@@ -1,0 +1,34 @@
+# Chapter 9 - Grounding AI in Your Data
+# From the book "AI, Automation and Analytics - Transforming Device Management
+# with Intune" (2nd Edition) by Jannik Reinhard.
+# https://github.com/JayRHa/intune-aaa-book-code
+#
+# The same hybrid + semantic query as query_hybrid_semantic.py, but as raw REST
+# against the current stable API. Keyless: pass an Entra bearer token (get one
+# with:  az account get-access-token --resource https://search.azure.com ) rather
+# than an api-key header - if you see headers={"api-key": ...} in old code, that
+# is the pattern to retire. The newer 2026-04-01 version adds the knowledge-base
+# surface; 2024-07-01 is the current stable version used here.
+#
+# Replace <service> with your AI Search service name and <Entra token> with a token.
+
+POST https://<service>.search.windows.net/indexes/intune-kb/docs/search?api-version=2024-07-01
+Authorization: Bearer <Entra token>
+Content-Type: application/json
+
+{
+  "search": "device fails compliance after BitLocker rotation",
+  "vectorQueries": [
+    {
+      "kind": "text",
+      "text": "device fails compliance after BitLocker rotation",
+      "fields": "vector",
+      "k": 50
+    }
+  ],
+  "queryType": "semantic",
+  "semanticConfiguration": "default",
+  "captions": "extractive",
+  "answers": "extractive",
+  "top": 5
+}

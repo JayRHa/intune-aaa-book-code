@@ -1,0 +1,38 @@
+# Chapter 4 - Intune's Capabilities in Analytics and Automation
+# From the book "AI, Automation and Analytics - Transforming Device Management
+# with Intune" (2nd Edition) by Jannik Reinhard.
+# https://github.com/JayRHa/intune-aaa-book-code
+#
+# The Intune admin center is a website built on top of Microsoft Graph. Anything
+# the portal does, you can do yourself. These are the read-only Graph calls from
+# the chapter. Run them in Graph Explorer (aka.ms/ge) signed in with an account
+# that holds the matching DeviceManagement*.Read.All scopes, or paste an Entra
+# bearer token into the Authorization header below and use any HTTP client / the
+# VS Code REST Client extension.
+#
+# A Graph request is:  https://graph.microsoft.com/{version}/{resource}?{query}
+#   version:  v1.0 for production, beta for preview functionality
+#   verbs:    GET reads, POST creates, PATCH updates, PUT replaces, DELETE removes
+
+@graph = https://graph.microsoft.com
+# @token = <paste an Entra bearer token here if not using Graph Explorer>
+
+### Who am I
+GET {{graph}}/v1.0/me
+# Authorization: Bearer {{token}}
+
+### First ten users
+GET {{graph}}/v1.0/users?$top=10
+
+### Managed devices, only the columns we care about
+GET {{graph}}/v1.0/deviceManagement/managedDevices?$select=deviceName,complianceState,operatingSystem
+
+### Tenant device overview (the number the Intune home page shows)
+GET {{graph}}/v1.0/deviceManagement/managedDeviceOverview
+
+### Reading collected inventory through Graph (currently beta only)
+### Replace DEVICE_ID with a real managedDevice id.
+GET {{graph}}/beta/deviceManagement/managedDevices('DEVICE_ID')/deviceInventories
+
+### One inventory topic, expanded to its individual properties
+GET {{graph}}/beta/deviceManagement/managedDevices('DEVICE_ID')/deviceInventories('Battery')?$expand=instances($expand=microsoft.graph.deviceInventorySimpleItem/properties)

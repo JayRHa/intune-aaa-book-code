@@ -1,0 +1,40 @@
+# Chapter 4 - Intune's Capabilities in Analytics and Automation
+# From the book "AI, Automation and Analytics - Transforming Device Management
+# with Intune" (2nd Edition) by Jannik Reinhard.
+# https://github.com/JayRHa/intune-aaa-book-code
+#
+# The report export API as raw REST - the same thing export-report.ps1 automates.
+# Pattern: start a job (POST), poll it (GET) until status == completed, then
+# download the short-lived url. Run in Graph Explorer, or add an Authorization:
+# Bearer <token> header.
+#
+# The endpoint is on v1.0 now, so you no longer reach for beta just to export.
+
+@graph = https://graph.microsoft.com
+
+### Step 1 - start the job. All discovered apps:
+POST {{graph}}/v1.0/deviceManagement/reports/exportJobs
+Content-Type: application/json
+
+{
+  "reportName": "DevicesByAppInv",
+  "localizationType": "LocalizedValuesAsAdditionalColumn"
+}
+
+### Step 1 (variant) - corporate-owned devices, only the device name column:
+POST {{graph}}/v1.0/deviceManagement/reports/exportJobs
+Content-Type: application/json
+
+{
+  "reportName": "Devices",
+  "filter": "(OwnerType eq '1')",
+  "select": ["DeviceName"],
+  "localizationType": "LocalizedValuesAsAdditionalColumn"
+}
+
+### Step 2 - poll by id until status reads "completed".
+### The POST response returns a job id like Devices_a1b2c3d4-... - substitute it.
+GET {{graph}}/v1.0/deviceManagement/reports/exportJobs('{jobId}')
+
+### Step 3 - the completed response includes a short-lived "url" pointing at a
+### zipped CSV (or JSON). Fetch it, unzip it, and you have your data.

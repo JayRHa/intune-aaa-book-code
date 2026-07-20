@@ -1,0 +1,121 @@
+// Chapter 4 - Intune's Capabilities in Analytics and Automation
+// From the book "AI, Automation and Analytics - Transforming Device Management
+// with Intune" (2nd Edition) by Jannik Reinhard.
+// https://github.com/JayRHa/intune-aaa-book-code
+//
+// KQL against a Log Analytics workspace that receives Intune diagnostic logs
+// (Reports > Diagnostics settings). Column names here match the actual Intune
+// tables - the biggest source of "why is my query empty" is a column that does
+// not exist. Run each block on its own in the Log Analytics query editor.
+//
+// Key idiom for Intune data: these datasets duplicate rows and keep history, so
+// take the latest state per device with arg_max() before you count.
+
+// --- The basics -------------------------------------------------------------
+
+// Everything (Log Analytics caps the rows it renders).
+IntuneDeviceComplianceOrg
+
+// Filter with where.
+IntuneDeviceComplianceOrg
+| where ComplianceState == "NonCompliant"
+
+// Choose columns with project.
+IntuneDeviceComplianceOrg
+| where ComplianceState == "NonCompliant"
+| project DeviceName, ComplianceState, OS, TimeGenerated
+
+// Sort with order by (newest first).
+IntuneDeviceComplianceOrg
+| order by TimeGenerated desc
+
+// Limit with top (sorts and cuts) or take (fast, unordered sample).
+IntuneDeviceComplianceOrg
+| top 10 by TimeGenerated desc
+
+// --- Aggregating with summarize --------------------------------------------
+
+// Count noncompliant devices.
+IntuneDeviceComplianceOrg
+| where ComplianceState == "NonCompliant"
+| summarize NonCompliantCount = count()
+
+// Group that count by operating system.
+IntuneDeviceComplianceOrg
+| where ComplianceState == "NonCompliant"
+| summarize NonCompliantCount = count() by OS
+
+// De-duplicate: keep the most recent record per device, then count.
+IntuneDeviceComplianceOrg
+| summarize arg_max(TimeGenerated, ComplianceState, OS) by DeviceName
+| summarize DeviceCount = count() by ComplianceState, OS
+
+// --- Time series and trends -------------------------------------------------
+
+// bin() buckets timestamps. Noncompliant devices per day over 30 days.
+IntuneDeviceComplianceOrg
+| where TimeGenerated >= ago(30d)
+| where ComplianceState == "NonCompliant"
+| summarize NonCompliantCount = count() by bin(TimeGenerated, 1d)
+| render timechart
+
+// Compliance distribution as a pie (render: timechart/barchart/piechart/columnchart).
+IntuneDeviceComplianceOrg
+| summarize arg_max(TimeGenerated, ComplianceState) by DeviceName
+| summarize Count = count() by ComplianceState
+| render piechart
+
+// --- Joining tables ---------------------------------------------------------
+
+// Enrich compliance records with device details. kind=inner keeps rows present
+// in both; kind=leftouter keeps every compliance row and fills where it can.
+IntuneDeviceComplianceOrg
+| where ComplianceState == "NonCompliant"
+| join kind=inner (
+    IntuneDevices
+    | project DeviceId, DeviceName, OS
+) on DeviceId
+
+// --- Reusable expressions with let ------------------------------------------
+
+let RecentNonCompliant =
+    IntuneDeviceComplianceOrg
+    | where TimeGenerated >= ago(7d)
+    | where ComplianceState == "NonCompliant";
+RecentNonCompliant
+| summarize Count = count() by OS
+
+// --- Putting it together ----------------------------------------------------
+
+// Last 7 days, latest state per device, joined for OS, charted by platform.
+let ComplianceData =
+    IntuneDeviceComplianceOrg
+    | where TimeGenerated >= ago(7d)
+    | summarize arg_max(TimeGenerated, ComplianceState, DeviceId) by DeviceName
+    | where ComplianceState == "NonCompliant";
+ComplianceData
+| join kind=inner (
+    IntuneDevices
+    | summarize arg_max(TimeGenerated, OS) by DeviceId
+    | project DeviceId, OS
+) on DeviceId
+| summarize NonCompliantCount = count() by OS
+| render barchart
+
+// --- Exercises --------------------------------------------------------------
+
+// Exercise 1 - audit trail: the 50 most recent admin actions.
+IntuneAuditLogs
+| top 50 by TimeGenerated desc
+
+// Exercise 2 - devices by OS, latest state only.
+IntuneDevices
+| summarize arg_max(TimeGenerated, OS) by DeviceId
+| summarize DeviceCount = count() by OS
+
+// Exercise 3 - repeat offenders: noncompliant more than once in 30 days.
+IntuneDeviceComplianceOrg
+| where TimeGenerated >= ago(30d) and ComplianceState == "NonCompliant"
+| summarize Violations = count() by DeviceName
+| where Violations > 1
+| order by Violations desc
