@@ -1,7 +1,7 @@
 <!-- jr-brand:start -->
 <div align="center">
   <a href="https://jannikreinhard.com/">
-    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/learning.svg" alt="Jannik Reinhard — Driving AI with passion" width="100%">
+    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/brand-header.png" alt="Jannik Reinhard — Driving AI with passion" width="100%">
   </a>
   <h1>AI, Automation and Analytics · Book Code</h1>
   <p><strong>Companion code for the book &#x27;AI, Automation and Analytics: Transforming Device Management with Intune&#x27; (2nd Edition) by Jannik Reinhard - every listing as a runnable file: Microsoft Graph, KQL, Device Query, keyless automation, Azure AI Search grounding, and a Microsoft Foundry assistant.</strong></p>
