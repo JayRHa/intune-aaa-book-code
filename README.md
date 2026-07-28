@@ -1,18 +1,18 @@
 <!-- jr-brand:start -->
 <div align="center">
   <a href="https://jannikreinhard.com/">
-    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/learning.svg" alt="Jannik Reinhard — AI, Cloud and Endpoint Management" width="100%">
+    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/learning.svg" alt="Jannik Reinhard — Driving AI with passion" width="100%">
   </a>
   <h1>AI, Automation and Analytics · Book Code</h1>
-  <p><strong>Companion code for the book 'AI, Automation and Analytics: Transforming Device Management with Intune' (2nd Edition) by Jannik Reinhard - every listing as a runnable file: Microsoft Graph, KQL, Device Query, keyless automation, Azure AI Search grounding, and a Microsoft Foundry assistant.</strong></p>
+  <p><strong>Companion code for the book &#x27;AI, Automation and Analytics: Transforming Device Management with Intune&#x27; (2nd Edition) by Jannik Reinhard - every listing as a runnable file: Microsoft Graph, KQL, Device Query, keyless automation, Azure AI Search grounding, and a Microsoft Foundry assistant.</strong></p>
   <p>
-  <a href="https://jannikreinhard.com/"><img src="https://img.shields.io/badge/Website-0A5FC0?style=flat-square&amp;logo=wordpress&amp;logoColor=white" alt="Website"></a>
+  <a href="https://jannikreinhard.com/"><img src="https://img.shields.io/badge/Website-146CDD?style=flat-square&amp;logo=wordpress&amp;logoColor=white" alt="Website"></a>
   <a href="https://github.com/JayRHa"><img src="https://img.shields.io/badge/GitHub-081427?style=flat-square&amp;logo=github&amp;logoColor=white" alt="GitHub"></a>
   <a href="https://www.linkedin.com/in/jannik-r/"><img src="https://img.shields.io/badge/LinkedIn-0795FF?style=flat-square&amp;logo=linkedin&amp;logoColor=white" alt="LinkedIn"></a>
   <a href="https://x.com/jannik_reinhard"><img src="https://img.shields.io/badge/X-081427?style=flat-square&amp;logo=x&amp;logoColor=white" alt="X"></a>
-  <a href="https://www.youtube.com/@ModernDevMgmt/featured"><img src="https://img.shields.io/badge/YouTube-0A5FC0?style=flat-square&amp;logo=youtube&amp;logoColor=white" alt="YouTube"></a>
-</p>
-  <p><sub>Book · Sample · Pattern · PowerShell · Practical by design</sub></p>
+  <a href="https://www.youtube.com/@jannikreinhard"><img src="https://img.shields.io/badge/YouTube-146CDD?style=flat-square&amp;logo=youtube&amp;logoColor=white" alt="YouTube"></a>
+  </p>
+  <p><sub>Driving AI with passion · Microsoft Foundry · Intune · Azure</sub></p>
 </div>
 <!-- jr-brand:end -->
 
