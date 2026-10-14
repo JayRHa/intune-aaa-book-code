@@ -1,32 +1,34 @@
 <!-- jr-brand:start -->
-<div align="center">
+<p align="center">
   <a href="https://jannikreinhard.com/">
-    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/brand-header.png" alt="Jannik Reinhard — Driving AI with passion" width="100%">
+    <img src="https://raw.githubusercontent.com/JayRHa/.github/main/assets/readme/brand-header.png" alt="Jannik Reinhard — I help enterprises ship secure AI agents" width="100%">
   </a>
-  <h1>AI, Automation and Analytics · Book Code</h1>
-  <p><strong>Companion code for the book &#x27;AI, Automation and Analytics: Transforming Device Management with Intune&#x27; (2nd Edition) by Jannik Reinhard - every listing as a runnable file: Microsoft Graph, KQL, Device Query, keyless automation, Azure AI Search grounding, and a Microsoft Foundry assistant.</strong></p>
-  <p>
-  <a href="https://jannikreinhard.com/"><img src="https://img.shields.io/badge/Website-146CDD?style=flat-square&amp;logo=wordpress&amp;logoColor=white" alt="Website"></a>
-  <a href="https://github.com/JayRHa"><img src="https://img.shields.io/badge/GitHub-081427?style=flat-square&amp;logo=github&amp;logoColor=white" alt="GitHub"></a>
-  <a href="https://www.linkedin.com/in/jannik-r/"><img src="https://img.shields.io/badge/LinkedIn-0795FF?style=flat-square&amp;logo=linkedin&amp;logoColor=white" alt="LinkedIn"></a>
-  <a href="https://x.com/jannik_reinhard"><img src="https://img.shields.io/badge/X-081427?style=flat-square&amp;logo=x&amp;logoColor=white" alt="X"></a>
-  <a href="https://www.youtube.com/@jannikreinhard"><img src="https://img.shields.io/badge/YouTube-146CDD?style=flat-square&amp;logo=youtube&amp;logoColor=white" alt="YouTube"></a>
-  </p>
-  <p><sub>Driving AI with passion · Microsoft Foundry · Intune · Azure</sub></p>
-</div>
+</p>
+<p align="center">
+  <a href="https://jannikreinhard.com/">Website</a> ·
+  <a href="https://www.linkedin.com/in/jannik-r/">LinkedIn</a> ·
+  <a href="https://x.com/jannik_reinhard">X</a> ·
+  <a href="https://www.youtube.com/@jannikreinhard">YouTube</a>
+</p>
 <!-- jr-brand:end -->
 
-## About This Repository
+# Intune AI, Automation and Analytics book code
+
+**Type:** Book companion · **Status:** Community project
+
+<a id="about-this-repository"></a>
+
+## Overview
+
+Companion code for the book 'AI, Automation and Analytics: Transforming Device Management with Intune' (2nd Edition) by Jannik Reinhard - every listing as a runnable file: Microsoft Graph, KQL, Device Query, keyless automation, Azure AI Search grounding, and a Microsoft Foundry assistant.
 
 Every code listing from the book **AI, Automation and Analytics: Transforming Device Management with Intune** (2nd Edition) by [Jannik Reinhard](https://jannikreinhard.com), as a file you can run, organized by chapter.
 
 This is the second edition, rechecked line by line for the Microsoft cloud as it actually is in 2026 - which is a different place than when the first edition shipped. Azure OpenAI became **Microsoft Foundry**. The way you authenticate to Microsoft Graph changed: the honest current answer is **stop using secrets**. Copilot in Intune went GA and now writes the very KQL this book teaches you to write by hand. So the code here is keyless from the start and current, not a reprint of 2024 patterns.
 
-## The 2026 Context
+<a id="start-here"></a>
 
-Three ideas run through all of it. **Keyless auth**: Azure-hosted automation uses a **managed identity**; code outside Azure uses **workload identity federation**; there is no client secret anywhere. **The current SDKs**: the `Microsoft.Graph` PowerShell SDK for Intune (MSOnline and AzureAD are retired), and `DefaultAzureCredential` from `azure-identity` in Python. **KQL in three places**: the same Kusto you learn for Log Analytics also drives **Device Query** and **Copilot in Intune** - learn it once, use it everywhere.
-
-## Start Here
+## Quickstart
 
 ```bash
 git clone https://github.com/JayRHa/intune-aaa-book-code
@@ -42,6 +44,10 @@ pip install -r requirements.txt
 ```
 
 Nothing here stores a secret. In Azure the identity is a managed identity; on your laptop it comes from `az login` / `Connect-MgGraph`; in a pipeline it comes from workload identity federation. See [Chapter 5](ch05-automation-solutions) for the full keyless story.
+
+## The 2026 Context
+
+Three ideas run through all of it. **Keyless auth**: Azure-hosted automation uses a **managed identity**; code outside Azure uses **workload identity federation**; there is no client secret anywhere. **The current SDKs**: the `Microsoft.Graph` PowerShell SDK for Intune (MSOnline and AzureAD are retired), and `DefaultAzureCredential` from `azure-identity` in Python. **KQL in three places**: the same Kusto you learn for Log Analytics also drives **Device Query** and **Copilot in Intune** - learn it once, use it everywhere.
 
 ## Chapters
 
@@ -72,13 +78,7 @@ Every file starts with a header naming its chapter and the book, and the setup i
 MIT - see [LICENSE](LICENSE).
 
 <!-- jr-brand-footer:start -->
-
 ---
 
-<div align="center">
-  <p><sub>Built and maintained by <a href="https://jannikreinhard.com/">Jannik Reinhard</a> · Microsoft MVP for Security and AI Platform.</sub></p>
-  <p><a href="https://www.buymeacoffee.com/jannikreinf">Support the open-source work</a></p>
-  <p><strong>Stay healthy, Cheers Jannik</strong></p>
-</div>
-
+[Articles and guides](https://jannikreinhard.com/) · [Repository index](https://github.com/JayRHa/.github/blob/main/REPOSITORIES.md)
 <!-- jr-brand-footer:end -->
