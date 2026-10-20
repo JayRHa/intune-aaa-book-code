@@ -14,6 +14,13 @@
 
 # Intune AI, Automation and Analytics book code
 
+## October 2026 book revision
+
+The updated example is [ch10-foundry-assistant/chat.py](ch10-foundry-assistant/chat.py). Its opening instructions list the required endpoint and deployment variables. Keep credentials out of source files.
+
+The relevant SDK interfaces were checked with Azure AI Projects 2.9.0, Azure Identity 1.26.0, OpenAI 3.35.1, and Anthropic 1.15.0 where applicable. These checks do not replace a test against your own authorized deployment. The existing ch10-foundry-assistant directory corresponds to Chapter 15 in the expanded second edition.
+
+
 **Type:** Book companion · **Status:** Community project
 
 <a id="about-this-repository"></a>
